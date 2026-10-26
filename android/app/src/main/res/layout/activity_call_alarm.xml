@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#07090B"
+    android:padding="28dp"
+    android:gravity="center_horizontal"
+    android:weightSum="1">
+
+    <!-- Top Status Banner -->
+    <TextView
+        android:id="@+id/alarm_type_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SCHEDULED CALL ALARM"
+        android:textColor="#10B981"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_marginTop="20dp" />
+
+    <!-- Center Contact Avatar & Details -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/alarm_avatar_letter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="#10B981"
+            android:textColor="#07090B"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="M"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/alarm_contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mother"
+            android:textColor="#F9FAFB"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/alarm_milestone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turning 24 Today! 🎂"
+            android:textColor="#F59E0B"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/alarm_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+1 (555) 019-2834"
+            android:textColor="#94A3B8"
+            android:textSize="18sp"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/alarm_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call Mother for Birthday"
+            android:textColor="#64748B"
+            android:textSize="14sp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Bottom Action Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <!-- Direct Call Button -->
+        <Button
+            android:id="@+id/btn_accept_call"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="📞 Call Now (Direct Dial)"
+            android:textColor="#07090B"
+            android:backgroundTint="#10B981"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Secondary Actions (Snooze & Dismiss) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_snooze_call"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="⏱ Snooze 10m"
+                android:textColor="#F59E0B"
+                android:backgroundTint="#14171C"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/btn_dismiss_call"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="✕ Dismiss"
+                android:textColor="#EF4444"
+                android:backgroundTint="#14171C"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

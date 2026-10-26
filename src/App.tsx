@@ -12,6 +12,7 @@ import BirthdayModal from './components/BirthdayModal';
 import NoteModal from './components/NoteModal';
 import CallAlarmScreen, { type AlarmTargetData } from './components/CallAlarmScreen';
 import { calculateAge } from './utils/dateUtils';
+import { scheduleNativeCallAlarm, cancelNativeCallAlarm } from './utils/telephony';
 import { PhoneCall, Cake, FileText, X } from 'lucide-react';
 
 export default function App() {
@@ -91,16 +92,31 @@ export default function App() {
     };
 
     await db.reminders.add(newReminder);
+
+    // Schedule on Android Native AlarmManager
+    await scheduleNativeCallAlarm({
+      id: newReminder.id,
+      timestamp: newReminder.eventTime,
+      phoneNumber: newReminder.targetNumber || '',
+      contactName: newReminder.contactName || '',
+      title: newReminder.title,
+      isBirthday: false
+    });
+
     setIsCallModalOpen(false);
     await loadAllData();
   };
 
   const handleToggleComplete = async (id: string, current: boolean) => {
     await db.reminders.update(id, { isCompleted: !current });
+    if (!current) {
+      await cancelNativeCallAlarm(id);
+    }
     await loadAllData();
   };
 
   const handleDeleteReminder = async (id: string) => {
+    await cancelNativeCallAlarm(id);
     await db.reminders.delete(id);
     await loadAllData();
   };
@@ -149,11 +165,24 @@ export default function App() {
     };
     await db.reminders.add(linkedReminder);
 
+    const ageInfo = calculateAge(data.birthDate);
+    // Schedule on Android Native AlarmManager
+    await scheduleNativeCallAlarm({
+      id: linkedReminder.id,
+      timestamp: linkedReminder.eventTime,
+      phoneNumber: linkedReminder.targetNumber || '',
+      contactName: linkedReminder.contactName || '',
+      title: linkedReminder.title,
+      isBirthday: true,
+      ageMilestone: ageInfo.nextAge
+    });
+
     setIsBirthdayModalOpen(false);
     await loadAllData();
   };
 
   const handleDeleteBirthday = async (id: string) => {
+    await cancelNativeCallAlarm(`call-bday-${id}`);
     await db.birthdays.delete(id);
     await db.reminders.delete(`call-bday-${id}`);
     await loadAllData();
