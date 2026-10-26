@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db, seedInitialData } from './db/database';
+import { db } from './db/database';
 import type { ReminderItem, BirthdayItem } from './types';
 import { ShieldCheck, PhoneCall, Calendar, Plus, Clock } from 'lucide-react';
 
@@ -8,9 +8,7 @@ export default function App() {
   const [birthdays, setBirthdays] = useState<BirthdayItem[]>([]);
 
   useEffect(() => {
-    seedInitialData().then(() => {
-      loadData();
-    });
+    loadData();
   }, []);
 
   const loadData = async () => {
